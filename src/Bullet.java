@@ -1,3 +1,4 @@
+import edu.digipen.SoundManager;
 import edu.digipen.gameobject.GameObject;
 import edu.digipen.math.Vec2;
 
@@ -14,6 +15,11 @@ public class Bullet extends GameObject
 	{
 		setVelocity(Vec2.scale(direction,speed));
 	}
+	@Override public void initialize()
+	{
+
+	}
+
 
 	@Override public void update(float dt)
 	{
@@ -21,11 +27,14 @@ public class Bullet extends GameObject
 		{
 			kill();
 		}
+
 	}
 	@Override public void collisionReaction(GameObject other)
 	{
 		if (other.getName().equals("asteroid"))
 		{
+			SoundManager.addSoundEffect("Split","Ship_Gun_3.wav");
+			SoundManager.playSoundEffect("Split");
 			kill();
 		}
 	}
